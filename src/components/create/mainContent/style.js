@@ -33,9 +33,9 @@ position:relative;
     .preview
     {
         height:100%;
-        background-image:url(https://assets-cdn.kahoot.it/builder/v2/assets/placeholder-cover-kahoot.ea3003d9.png);
+        // background-image:url("https://firebasestorage.googleapis.com/v0/b/kahoot-d433f.appspot.com/o/download%20(10).jpg?alt=media&token=0e587fcc-9181-4782-bd2b-f79f640f0064");
         background-position:center top;
-        background-size:cover;
+        background-size:contain;
         background-repeat:no-repeat;
         background-color:rgb(204, 204, 204);
         display:flex;

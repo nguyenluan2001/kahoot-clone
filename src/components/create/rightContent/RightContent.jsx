@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import { RightContentContainer } from "./style"
 import { FaRegClock, FaMedal, FaChevronRight } from "react-icons/fa"
 import { updateSettingCurrentQuiz } from "../../../slice/quizSlice"
-import { useDispatch } from "react-redux"
+import { useDispatch,useSelector } from "react-redux"
 function RightContent({ toggleSetting }) {
     const [input, setInput] = useState({ timeLimit: "", point: "" })
     const dispatch = useDispatch()
+    const quiz=useSelector(state=>state.quiz)
     function handleInput(e) {
         setInput(pre => {
             return { ...pre, [e.target.name]: e.target.value }
@@ -17,6 +18,7 @@ function RightContent({ toggleSetting }) {
                     point: ""
                 }
             ))
+            // console.log(123)
 
         }
         else {
@@ -28,14 +30,14 @@ function RightContent({ toggleSetting }) {
             ))
         }
         // func()
-        console.log(input)
+        // console.log(input)
     }
     return (
         <RightContentContainer toggleSetting={toggleSetting}>
             <div className="time-limit">
                 <FaRegClock></FaRegClock>
                 <span>Time limit</span>
-                <select name="timeLimit" id="" className="form-control" onChange={(e) => handleInput(e)}>
+                <select name="timeLimit" id="" value={quiz.currentQuiz.timeLimit} className="form-control"  onChange={(e) => handleInput(e)}>
                     <option value="5">5 seconds</option>
                     <option value="10">10 seconds</option>
                     <option value="20">20 seconds</option>
@@ -50,7 +52,7 @@ function RightContent({ toggleSetting }) {
             <div className="point">
                 <FaMedal></FaMedal>
                 <span>Points</span>
-                <select name="point" id="" className="form-control" onChange={(e) => handleInput(e)}>
+                <select name="point" id="" value={quiz.currentQuiz.point} className="form-control" onChange={(e) => handleInput(e)}>
                     <option value="standard">
                         Standard
                     </option>

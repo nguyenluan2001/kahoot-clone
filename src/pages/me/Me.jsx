@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-do
 import Discover from '../discover/Discover'
 import { LeftBar, RightBar, Navbar, UserInfo } from "./style"
 import { FaGlobe, FaBars, FaUserAlt } from "react-icons/fa"
+import Library from '../libarary/Library'
+import Detail from '../detail/Detail'
 function Me({ props }) {
     console.log(props)
     return (
@@ -34,9 +36,8 @@ function Me({ props }) {
             </Header>
             <Switch>
                 <Route path={`${props.match.path}/discover`} exact component={Discover}></Route>
-                <Route path={`${props.match.path}/library`}>
-                    <h1>library</h1>
-                </Route>
+                <Route path={`${props.match.path}/library`} component={Library}></Route>
+                <Route path={`${props.match.path}/detail/:id`} component={Detail}></Route>
             </Switch>
         </>
     )

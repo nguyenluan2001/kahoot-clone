@@ -10,7 +10,14 @@ export const QuizItem = styled.div`
 display:grid;
 grid-template-columns:1fr 5fr;
 padding:1rem;
-background:#eaf4fc;
+background:white;
+&.active{
+    background:#eaf4fc;
+    .content{
+        background:white;
+
+    }
+}
 .action{
     display:flex;
     flex-direction:column;
@@ -22,16 +29,22 @@ background:#eaf4fc;
 }
 .content{
     text-align:center;
-    background:white;
+    background:#f2f2f2;
     padding:0.4rem;
     border-radius:5px;
     .wrap-time{
-        width:30px;
-        height:30px;
+        width:35px;
+        height:35px;
         margin:0px auto;
+        margin-bottom:5px;
         .time{
             border:1px solid black;
             border-radius:50%;
+            height:100%;
+            width:100%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
         }
     }
     .answers{

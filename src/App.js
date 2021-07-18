@@ -18,6 +18,8 @@ function App() {
             <Route path="/login" component={Login}></Route>
             <PrivateRoute path="/me/creator" exact component={Create}>
             </PrivateRoute>
+            <PrivateRoute path="/me/edit/:id" exact component={Create}>
+            </PrivateRoute>
             <PrivateRoute path="/me"  component={Me}></PrivateRoute>
             {/* <Route path="/me/creator" exact component={Create}></Route>
             <Route path="/me" component={Me}></Route> */}

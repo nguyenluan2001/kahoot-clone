@@ -27,13 +27,5 @@ position:relative;
         margin-top:0.5rem;
     }
 }
-.toggle{
-    background:white;
-    position:absolute;
-    padding:0.5rem;
-    font-size:1.5rem;
-    left:-30px;
-    top:40%;
-    border-radius:5px;
-}
+
 `

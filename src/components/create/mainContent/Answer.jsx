@@ -4,7 +4,14 @@ import { FaCheck } from "react-icons/fa"
 import { useDispatch, useSelector } from "react-redux"
 import { updateCurrentQuiz } from "../../../slice/quizSlice"
 import { QuizItem } from '../leftContent/style'
-function Answer({ type, color, children, answer, order }) {
+function Answer({
+    type,
+    color,
+    children,
+    answer,
+    order ,
+
+}) {
     const [typing, setTyping] = useState(false)
     const [check, setCheck] = useState(false)
     const [numChar, setNumChar] = useState(75)
@@ -30,6 +37,18 @@ function Answer({ type, color, children, answer, order }) {
         }
         setNumChar(75)
     }, [quiz.currentQuiz.id])
+    useEffect(()=>{
+        setCheck(false)
+        if(quiz.currentQuiz.correct==`answer_${order}` )
+        {
+            setCheck(true)
+        }
+        else {
+            console.log('conflict')
+        }
+
+    },[quiz.currentQuiz.correct])
+
     function handleInput(e) {
         if (e.target.value != "") {
             setTyping(true)
@@ -141,21 +160,30 @@ function Answer({ type, color, children, answer, order }) {
 
         }
 
-        console.log(quiz.currentQuiz)
+        // console.log(quiz.currentQuiz)
     }
     function handleCheck() {
-        setCheck(pre => !pre)
+        // setCheck(pre => !pre)
+        setCheck(true)
+        let newQuiz = JSON.parse(JSON.stringify(quiz.currentQuiz))
+        newQuiz.imageFile=quiz.currentQuiz.imageFile
+        console.log(newQuiz)
         if (!check) {
-            let newQuiz = { ...quiz.currentQuiz }
-            newQuiz.correct = order - 1
+            // newQuiz.correct = order - 1
             // newQuiz.answers[`answer_${order}`].check=true
             switch (order) {
                 case "1":
                     {
+                        
+                        for(let answer in newQuiz.answers)
+                        {
+                            newQuiz.answers[answer].check=false
+                           
+                        }
                         newQuiz = {
                             ...newQuiz,
-                            answers: { ...newQuiz.answers, answer_1: { ...newQuiz.answers[`answer_${order}`], check: true } },
-                            correct: order - 1
+                            answers: { ...newQuiz.answers, answer_1: { ...newQuiz.answers[`answer_1`], check: true } },
+                            correct: "answer_1"
                         }
                         dispatch(updateCurrentQuiz(newQuiz))
                         break;
@@ -163,10 +191,15 @@ function Answer({ type, color, children, answer, order }) {
                     }
                 case "2":
                     {
+                        for(let answer in newQuiz.answers)
+                        {
+                            newQuiz.answers[answer].check=false
+                           
+                        }
                         newQuiz = {
                             ...newQuiz,
-                            answers: { ...newQuiz.answers, answer_2: { ...newQuiz.answers[`answer_${order}`], check: true } },
-                            correct: order - 1
+                            answers: { ...newQuiz.answers, answer_2: { ...newQuiz.answers[`answer_2`], check: true } },
+                            correct: "answer_2"
                         }
                         dispatch(updateCurrentQuiz(newQuiz))
 
@@ -176,10 +209,15 @@ function Answer({ type, color, children, answer, order }) {
                     }
                 case "3":
                     {
+                        for(let answer in newQuiz.answers)
+                        {
+                            newQuiz.answers[answer].check=false
+                           
+                        }
                         newQuiz = {
                             ...newQuiz,
-                            answers: { ...newQuiz.answers, answer_3: { ...newQuiz.answers[`answer_${order}`], check: true } },
-                            correct: order - 1
+                            answers: { ...newQuiz.answers, answer_3: { ...newQuiz.answers[`answer_3`], check: true } },
+                            correct: "answer_3"
                         }
                         dispatch(updateCurrentQuiz(newQuiz))
 
@@ -189,10 +227,15 @@ function Answer({ type, color, children, answer, order }) {
                     }
                 case "4":
                     {
+                        for(let answer in newQuiz.answers)
+                        {
+                            newQuiz.answers[answer].check=false
+                           
+                        }
                         newQuiz = {
                             ...newQuiz,
-                            answers: { ...newQuiz.answers, answer_4: { ...newQuiz.answers[`answer_${order}`], check: true } },
-                            correct: order - 1
+                            answers: { ...newQuiz.answers, answer_4: { ...newQuiz.answers[`answer_4`], check: true } },
+                            correct: "answer_4"
                         }
                         dispatch(updateCurrentQuiz(newQuiz))
 
@@ -201,20 +244,20 @@ function Answer({ type, color, children, answer, order }) {
 
                     }
             }
-            console.log(newQuiz)
+            // console.log(newQuiz)
             // dispatch(updateCurrentQuiz(
             //     newQuiz
             // ))
         }
         else {
-            let newQuiz = { ...quiz.currentQuiz }
-            newQuiz.correct = ""
+            // let newQuiz = { ...quiz.currentQuiz }
+            // newQuiz.correct = ""
             switch (order) {
                 case "1":
                     {
                         newQuiz = {
                             ...newQuiz,
-                            answers: { ...newQuiz.answers, answer_1: { ...newQuiz.answers[`answer_${order}`], check: false } },
+                            answers: { ...newQuiz.answers, answer_1: { ...newQuiz.answers[`answer_1`], check: false } },
                             correct: null
                         }
                         dispatch(updateCurrentQuiz(newQuiz))
@@ -226,7 +269,7 @@ function Answer({ type, color, children, answer, order }) {
                     {
                         newQuiz = {
                             ...newQuiz,
-                            answers: { ...newQuiz.answers, answer_2: { ...newQuiz.answers[`answer_${order}`], check: false } },
+                            answers: { ...newQuiz.answers, answer_2: { ...newQuiz.answers[`answer_2`], check: false } },
                             correct: null
                         }
                         dispatch(updateCurrentQuiz(newQuiz))
@@ -239,7 +282,7 @@ function Answer({ type, color, children, answer, order }) {
                     {
                         newQuiz = {
                             ...newQuiz,
-                            answers: { ...newQuiz.answers, answer_3: { ...newQuiz.answers[`answer_${order}`], check: false } },
+                            answers: { ...newQuiz.answers, answer_3: { ...newQuiz.answers[`answer_3`], check: false } },
                             correct: null
                         }
                         dispatch(updateCurrentQuiz(newQuiz))
@@ -252,7 +295,7 @@ function Answer({ type, color, children, answer, order }) {
                     {
                         newQuiz = {
                             ...newQuiz,
-                            answers: { ...newQuiz.answers, answer_4: { ...newQuiz.answers[`answer_${order}`], check: false } },
+                            answers: { ...newQuiz.answers, answer_4: { ...newQuiz.answers[`answer_4`], check: false } },
                             correct: null
                         }
                         dispatch(updateCurrentQuiz(newQuiz))
@@ -262,7 +305,6 @@ function Answer({ type, color, children, answer, order }) {
 
                     }
             }
-            console.log(newQuiz)
 
         }
     }

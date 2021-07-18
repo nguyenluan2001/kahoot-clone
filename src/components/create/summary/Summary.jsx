@@ -1,9 +1,30 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState,useEffect } from 'react'
 import { Container, Content, LeftContent, RightContent, Info, WrapButton } from "./style"
+import {useDispatch,useSelector} from "react-redux"
+import {updateSummary} from "../../../slice/quizSlice"
 function Summary({ setShowSummary, setSummary }) {
     const imgSummaryRef = useRef()
-    const [input, setInput] = useState({})
+    const quiz=useSelector(state=>state.quiz)
+    const dispatch=useDispatch()
+    const initialInput={
+        title:quiz.title,
+        description:quiz.description,
+        cover_img:quiz.coverImgPreview
+    }
+    const [input, setInput] = useState(initialInput)
     const [error, setError] = useState(false)
+    useEffect(()=>{
+        if(input.cover_img)
+        {
+
+            imgSummaryRef.current.style.backgroundImage=`url(${URL.createObjectURL(input.cover_img)})`;
+        }
+        if(quiz.coverImg!="")
+        {
+            imgSummaryRef.current.style.backgroundImage=`url(${quiz.coverImg})`;
+
+        }
+    },[])
     function handleUploadImgSummary(e) {
         let file = e.target.files[0]
         imgSummaryRef.current.style.backgroundImage = `url(${URL.createObjectURL(file)})`
@@ -24,8 +45,9 @@ function Summary({ setShowSummary, setSummary }) {
         else {
             setSummary(input)
             setShowSummary(false)
+            dispatch(updateSummary(input))
+            // console.log(input)
         }
-        // console.log()
     }
     return (
         <Container>
@@ -35,12 +57,12 @@ function Summary({ setShowSummary, setSummary }) {
                     <LeftContent>
                         <div className="form-group">
                             <label htmlFor="">Title</label>
-                            <input type="text" name="title" className="form-control" onChange={(e) => handleInput(e)} />
+                            <input type="text" name="title" className="form-control" value={input.title} onChange={(e) => handleInput(e)} />
                             {error&& <p className="text-danger">Title is required</p>}
                         </div>
                         <div className="form-group">
                             <label htmlFor="">Description (Optional)</label>
-                            <textarea name="description" className="form-control" id="" cols="30" rows="5" onChange={(e) => handleInput(e)}></textarea>
+                            <textarea name="description" value={input.description} className="form-control" id="" cols="30" rows="5" onChange={(e) => handleInput(e)}></textarea>
                         </div>
                         <div className="form-group">
                             <label htmlFor="">Save to</label>
@@ -54,7 +76,7 @@ function Summary({ setShowSummary, setSummary }) {
                     <RightContent>
                         <div className="form-group image">
                             <label htmlFor="">Cover image</label>
-                            <input type="file" hidden id="fileSummary" onChange={(e) => handleUploadImgSummary(e)} />
+                            <input type="file" hidden name="cover_img" id="fileSummary" onChange={(e) => handleUploadImgSummary(e)} />
                             <div ref={imgSummaryRef} className="previewSummary">
                                 <label htmlFor="fileSummary" className="upload_img">Upload</label>
                             </div>

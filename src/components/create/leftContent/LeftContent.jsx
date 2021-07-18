@@ -6,7 +6,7 @@ import {setCurrentQuiz,deleteQuiz,addQuiz} from "../../../slice/quizSlice"
 function LeftContent() {
     const quiz = useSelector(state => state.quiz)
     const dispatch=useDispatch()
-    const arrayAnswers=[0,1,2,3]
+    const arrayAnswers=[1,2,3,4]
     function handleChooseQuiz(quiz)
     {
         dispatch(setCurrentQuiz(quiz))
@@ -20,12 +20,13 @@ function LeftContent() {
     {
         dispatch(addQuiz())
     }
+    // console.log(quiz)
     return (
         <LeftContentContainer>
             <WrapListQuiz>
 
             {quiz.listQuizs.map(item => {
-                return <QuizItem >
+                return <QuizItem className={item.id==quiz.currentQuiz.id?"active":""} >
                     <div className="action">
                         <FaClone></FaClone>
                         <FaTrashAlt onClick={()=>handleDelete(item)}></FaTrashAlt>
@@ -33,12 +34,12 @@ function LeftContent() {
                     <div className="content" onClick={()=>handleChooseQuiz(item)}>
                         <p className="question">{item.question}</p>
                         <div className="wrap-time">
-                            <div className="time">20</div>
+                            <div className="time">{item.timeLimit}</div>
                         </div>
                         <div className="answers">
                             {
                                 arrayAnswers.map(answer => {
-                                    if(answer==item.correct)
+                                    if(`answer_${answer}`==item.correct)
                                     {
                                         return <div className="answer correct"></div>
                                     }
