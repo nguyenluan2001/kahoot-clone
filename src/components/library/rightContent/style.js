@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import {Link} from "react-router-dom"
 export const Container = styled.div`
-padding:1rem 1rem;;
+padding:1rem 1rem;
 `
-export const QuizItemContainer = styled(Link)`
+export const QuizItemContainer = styled.div`
 display:grid;
 grid-template-columns:1fr 5fr;
 min-height:130px;
@@ -12,8 +12,11 @@ padding:5px;
 box-sizing:border-box;
 margin-bottom:2rem;
 cursor:pointer;
+text-decoration:none;
+position:relative;
 &:hover{
     transform:scale(0.99);
+    z-index:5;
 }
 .wrap-img{
     display:flex;
@@ -56,6 +59,31 @@ cursor:pointer;
             .star{
                 &:hover{
                     color:rgb(255, 192, 10);
+                }
+            }
+            .control{
+                .control-action{
+                    display:block;
+                    position:absolute;
+                    list-style-type:none;
+                    padding:0;
+                    font-size: 1rem;
+                    border:1px solid rgb(0,0,0,0.3);
+                    border-radius:5px;
+                    width:200px;
+                    right:0px;
+                    background:white;
+                    z-index:20;
+                    li{
+                        cursor:pointer;
+                        padding: 0.5rem;
+                        svg{
+                            margin-right:1rem;
+                        }
+                        &:hover{
+                            background:rgb(241,241,241);
+                        }
+                    }
                 }
             }
         }

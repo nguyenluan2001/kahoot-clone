@@ -1,12 +1,17 @@
 import React from 'react'
 import { Container} from "./style"
 import QuizItem from './QuizItem'
-function RightContent({quizs}) {
+function RightContent({quizs,setQuizs,setShowPlayModal,setQuizPlay}) {
     return (
         <Container>
             {
                 quizs.map(item=>{
-                    return <QuizItem quiz={item}></QuizItem>
+                    return <QuizItem 
+                    quiz={item}
+                    setQuizs={setQuizs}
+                    setShowPlayModal={setShowPlayModal}
+                    setQuizPlay={setQuizPlay}
+                    ></QuizItem>
                 })
             }
            

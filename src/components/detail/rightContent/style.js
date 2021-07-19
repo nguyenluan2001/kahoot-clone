@@ -1,7 +1,8 @@
 import styled from "styled-components";
 export const Container = styled.div`
 padding:1rem 2rem;
-height:inherit;
+min-height:inherit;
+background:#f2f2f2;
 .top-content{
     display:flex;
     justify-content:space-between;

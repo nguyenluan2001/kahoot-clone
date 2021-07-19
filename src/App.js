@@ -7,6 +7,7 @@ import Discover from './pages/discover/Discover';
 import PrivateRoute from './components/PrivateRoute';
 import Me from './pages/me/Me';
 import Create from './pages/create/Create';
+import Challenge from './pages/challenge/Challenge';
 function App() {
   return (
     <div className="App">
@@ -21,6 +22,7 @@ function App() {
             <PrivateRoute path="/me/edit/:id" exact component={Create}>
             </PrivateRoute>
             <PrivateRoute path="/me"  component={Me}></PrivateRoute>
+            <Route path="/challenge/:id" component={Challenge}></Route>
             {/* <Route path="/me/creator" exact component={Create}></Route>
             <Route path="/me" component={Me}></Route> */}
           </Switch>
