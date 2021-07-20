@@ -23,15 +23,22 @@ function Challenge() {
         }, 1000)
     }, [])
     useEffect(() => {
-        if (time == 1) {
+        if (time == 5) {
             setShowQuestion(false)
+            setTime(0)
             clearInterval(timeToReady)
         }
     }, [time])
+    useEffect(() => {
+        clearInterval(timeToReady)
+        timeToReady = setInterval(() => {
+            setTime(pre => pre + 1)
+        }, 1000)
+    }, [challenge.currentQuestion.id])
     console.log(challenge)
     return (
         <div>
-            {finishQuiz?<ShowResult></ShowResult>:(showQuestion ? <ShowQuestion time={time}></ShowQuestion> : <DoQuestion setFinishQuiz={setFinishQuiz} setShowQuestion={setShowQuestion} setTime={setTime}></DoQuestion>)}
+            {finishQuiz ? <ShowResult></ShowResult> : (showQuestion ? <ShowQuestion time={time}></ShowQuestion> : <DoQuestion setFinishQuiz={setFinishQuiz} setShowQuestion={setShowQuestion} setTime={setTime}></DoQuestion>)}
         </div>
     )
 }

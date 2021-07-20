@@ -2,7 +2,9 @@ import {createSlice,createAsyncThunk} from "@reduxjs/toolkit"
 import {firestore} from "../firebase"
 import { current } from "@reduxjs/toolkit"
 const initialState={
-    quiz:{},
+    quiz:{
+        listQuizs:[]
+    },
     currentQuestion:{},
     result:[]
 }

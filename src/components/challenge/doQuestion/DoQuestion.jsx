@@ -4,39 +4,48 @@ import { useSelector, useDispatch } from "react-redux"
 import AnswerItem from './AnswerItem'
 import Countdown from 'react-countdown';
 import Alert from './Alert';
-import { nextQuestion } from "../../../slice/challengeSlice"
-function DoQuestion({ setFinishQuiz,setShowQuestion,setTime }) {
+import { nextQuestion, updateResult } from "../../../slice/challengeSlice"
+let countDown = null 
+function DoQuestion({ setFinishQuiz, setShowQuestion }) {
     const challenge = useSelector(state => state.challenge)
     let currentQuestion = challenge.currentQuestion
     const dispatch = useDispatch()
     const [chooseAnswer, setChooseAnswer] = useState(null)
     const [isClickAnswer, setIsClickAnswer] = useState(false)
     const [showResult, setShowResult] = useState(false)
+    const [time, setTime] = useState(999)
     const countDownRef = useRef()
+    // useEffect(() => {
+    //     countDown = setInterval(() => {
+    //         setTime(pre => pre - 1)
+    //     }, 1000)
+    // }, [])
+   
     useEffect(() => {
+        clearInterval(countDown)
         setIsClickAnswer(false)
         setShowResult(false)
+        setTime(currentQuestion.timeLimit)
+        countDown = setInterval(() => {
+            setTime(pre => pre - 1)
+        }, 1000)
     }, [currentQuestion.id])
-    const renderer = ({ hours, minutes, seconds, completed }) => {
-        if (completed) {
+    useEffect(() => {
+        if (time == 0) {
+            let question = { ...currentQuestion, status: false }
+            dispatch(updateResult(question))
             setShowResult(false)
             setIsClickAnswer(true)
-            return ""
-
-            // alert(1)
-        } else {
-            // Render a countdown
-            return <span>{minutes * 60 + seconds}</span>;
+            clearInterval(countDown)
         }
-    };
+    }, [time])
     function handleNextQuestion() {
-        console.log(challenge)
         if (challenge.result.length == challenge.quiz.listQuizs.length) {
             setFinishQuiz(true)
         }
         else {
             dispatch(nextQuestion())
-            // setShowQuestion(true)
+            setShowQuestion(true)
             // setTime(0)
         }
     }
@@ -63,7 +72,7 @@ function DoQuestion({ setFinishQuiz,setShowQuestion,setTime }) {
                 <img src={currentQuestion.image} alt="" />
             </div>
             {!isClickAnswer && <div className="count-down">
-                <Countdown ref={countDownRef} controlled={false} renderer={renderer} date={Date.now() + currentQuestion.timeLimit * 1000} />
+                {time}
             </div>}
             <button className="btn btn-primary next" onClick={() => handleNextQuestion()}>Next</button>
             <div className="answers">

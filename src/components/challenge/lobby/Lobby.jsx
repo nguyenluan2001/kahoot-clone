@@ -3,8 +3,14 @@ import {Container,TopContent,BottomContent} from "./style"
 function Lobby() {
     return (
         <Container>
-            <TopContent></TopContent>
-            <BottomContent></BottomContent>
+            {/* <TopContent>
+                <QuizInfo>
+                    <div className="img">
+                        <img src="" alt="" />
+                    </div>
+                </QuizInfo>
+            </TopContent>
+            <BottomContent></BottomContent> */}
         </Container>
     )
 }
