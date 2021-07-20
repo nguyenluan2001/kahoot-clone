@@ -30,7 +30,7 @@ const initialState = {
             }
         },
         correct: "",
-        timeLimit: 5,
+        timeLimit: "5",
         point: "standard",
         image: null,
         imageName:null,
@@ -62,7 +62,7 @@ const initialState = {
                 }
             },
             correct: null,
-            timeLimit: 5,
+            timeLimit: "5",
             point: "standard",
             image: null,
             imgName:null,
@@ -162,7 +162,9 @@ export const quizSlice = createSlice({
                 timeLimit: 5,
                 point: "standard",
                 image: null,
-                imageFile: null
+                imageFile: null,
+                imagePreview: null,
+
             }
             state.currentQuiz = newQuiz
             state.listQuizs.push(newQuiz)

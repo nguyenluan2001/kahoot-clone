@@ -26,7 +26,7 @@ function LeftContent({ quiz, id }) {
     return (
         <Container>
             <div className="img">
-                <img src={quiz?.coverImg} alt="" />
+                <img src={quiz?.coverImg?quiz?.coverImg:"https://assets-cdn.kahoot.it/builder/v2/assets/placeholder-cover-kahoot.ea3003d9.png"} alt="" />
             </div>
             <div className="info">
                 <p className="title">{quiz?.title}</p>

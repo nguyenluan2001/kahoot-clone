@@ -31,6 +31,7 @@ position:relative;
     }
     .img{
         width:90%;
+        background:rgb(204, 204, 204);
         img{
             width:100%;
             height:auto;

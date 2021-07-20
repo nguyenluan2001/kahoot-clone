@@ -6,6 +6,8 @@ position:relative;
 .img{
     height:300px;
     overflow:hidden;
+    background:rgb(204, 204, 204);
+
     img{
         width:100%;
     }

@@ -37,6 +37,7 @@ cursor:pointer;
     }
     .right-content{
         position:relative;
+        background:rgb(204, 204, 204);
         img{
             width:100%;
             height:100%;

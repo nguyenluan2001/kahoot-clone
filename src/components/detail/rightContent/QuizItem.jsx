@@ -23,7 +23,7 @@ function QuizItem({question,showAllAnswers,index}) {
                     <p className="question">{question?.question}</p>
                 </div>
                 <div className="right-content">
-                    <img src={question?.image} alt="" />
+                    <img src={question?.image?question?.image:"https://assets-cdn.kahoot.it/builder/v2/assets/placeholder-cover-kahoot.ea3003d9.png"} alt="" />
                     <div className="time">{question.timeLimit} sec</div>
                 </div>
             </div>

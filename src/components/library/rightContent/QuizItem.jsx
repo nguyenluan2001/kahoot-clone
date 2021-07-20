@@ -47,7 +47,7 @@ function QuizItem({ quiz, setQuizs,setShowPlayModal,setQuizPlay }) {
                 <div className="wrap-img">
                     <input type="checkbox" />
                     <div className="img">
-                        <img src={quiz.data().coverImg} alt="" />
+                        <img src={quiz.data().coverImg?quiz.data().coverImg:"https://assets-cdn.kahoot.it/builder/v2/assets/placeholder-cover-kahoot.ea3003d9.png"} alt="" />
                     </div>
                 </div>
                 <div className="content">

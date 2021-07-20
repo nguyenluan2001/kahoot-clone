@@ -5,7 +5,10 @@ import AnswerItem from './AnswerItem'
 import Countdown from 'react-countdown';
 import Alert from './Alert';
 import { nextQuestion, updateResult } from "../../../slice/challengeSlice"
-let countDown = null 
+import { useAudio } from "../../../hooks/useAudio"
+import correct from "../../../assets/correct.mp3"
+import wrong from "../../../assets/wrong.mp3"
+let countDown = null
 function DoQuestion({ setFinishQuiz, setShowQuestion }) {
     const challenge = useSelector(state => state.challenge)
     let currentQuestion = challenge.currentQuestion
@@ -15,14 +18,16 @@ function DoQuestion({ setFinishQuiz, setShowQuestion }) {
     const [showResult, setShowResult] = useState(false)
     const [time, setTime] = useState(999)
     const countDownRef = useRef()
-    // useEffect(() => {
-    //     countDown = setInterval(() => {
-    //         setTime(pre => pre - 1)
-    //     }, 1000)
-    // }, [])
-   
+    const { audio } = useAudio(currentQuestion.timeLimit)
+    useEffect(() => {
+        console.log(audio)
+        audio?.play()
+    }, [audio])
+
     useEffect(() => {
         clearInterval(countDown)
+        // console.log(audio.stop())
+        audio?.pause()
         setIsClickAnswer(false)
         setShowResult(false)
         setTime(currentQuestion.timeLimit)
@@ -36,9 +41,24 @@ function DoQuestion({ setFinishQuiz, setShowQuestion }) {
             dispatch(updateResult(question))
             setShowResult(false)
             setIsClickAnswer(true)
+            audio?.pause()
             clearInterval(countDown)
         }
     }, [time])
+    useEffect(() => {
+        audio?.pause()
+        if(isClickAnswer)
+        {
+            if (showResult) {
+                let audio = new Audio(correct)
+                audio.play()
+            }
+            else {
+                let audio = new Audio(wrong)
+                audio.play(wrong)
+            }
+        }
+    }, [isClickAnswer])
     function handleNextQuestion() {
         if (challenge.result.length == challenge.quiz.listQuizs.length) {
             setFinishQuiz(true)
