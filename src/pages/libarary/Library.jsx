@@ -3,18 +3,25 @@ import RightContent from '../../components/library/rightContent/RightContent'
 import ModalPlay from '../../components/modalPlay/ModalPlay'
 import { firestore } from "../../firebase"
 import { LibraryContainer } from './style'
+import {auth} from "../../firebase"
 function Library() {
     const [quizs, setQuizs] = useState([])
     const [showPlayModal,setShowPlayModal]=useState(false)
     const [quizPlay,setQuizPlay]=useState(null)
     useEffect(() => {
-        firestore.collection('quizs').onSnapshot(res => {
-            let listQuizs = []
-            res.docs.forEach(item => {
-                listQuizs.push(item)
+        if(auth.currentUser)
+        {
+
+            firestore.collection('quizs')
+            .where("userId","==",auth.currentUser?.uid)
+            .onSnapshot(res => {
+                let listQuizs = []
+                res.docs.forEach(item => {
+                    listQuizs.push(item)
+                })
+                setQuizs(listQuizs)
             })
-            setQuizs(listQuizs)
-        })
+        }
     }, [])
 
 

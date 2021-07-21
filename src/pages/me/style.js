@@ -1,12 +1,12 @@
 import styled from "styled-components";
-export const Navbar=styled.div`
+export const Navbar = styled.div`
 display:flex;
 justify-content:space-between;
 align-items:center;
 width:100%;
 padding-left:2rem;
 `
-export const LeftBar=styled.div`
+export const LeftBar = styled.div`
 display:flex;
 .selected{
     color:#46178f;
@@ -32,7 +32,7 @@ a{
     
 }
 `
-export const RightBar=styled.div`
+export const RightBar = styled.div`
 display:flex;
 align-items:center;
 .create{
@@ -50,7 +50,7 @@ align-items:center;
     }
 }
 `
-export const UserInfo=styled.div`
+export const UserInfo = styled.div`
 
 .icon{
     background:#0aa3a3;
@@ -62,5 +62,86 @@ export const UserInfo=styled.div`
     border-radius:50%;
     color:white;
     cursor:pointer;
+}
+#control-user{
+    border:1px solid rgba(0,0,0,0.2);
+    border-radius:5px;
+    background:white;
+    position:absolute;
+    right:10px;
+    padding:0.5rem 1rem;
+    width:20%;
+    z-index:5;
+    .user-name
+    {
+        font-weight:bold;
+
+    }
+    .setting,.support{
+        margin-bottom:1rem;
+        a{
+            padding:0.5rem 0.5rem;
+            font-weight:bold;
+            color:black;
+            border-left:3px solid transparent;
+            text-decoration:none;
+            display:block;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            svg{
+                margin-right:1rem;
+            }
+            &:hover{
+                border-left:3px solid rgb(70, 23, 143);
+                color:rgb(70, 23, 143);
+            }
+            .icon-up{
+                display:none;
+            }
+            // .icon-down{
+            //     display:none;
+
+            // }
+            &.show{
+                .icon-up{
+                    display:inline-block;
+                }
+                .icon-down{
+                    display:none;
+                    margin-left:auto;
+                }
+            }
+        }
+        ul{
+            list-style-type:none;
+            padding:0;
+            margin:0;
+            li{
+                padding:0.5rem 0.5rem;
+                border-left:3px solid transparent;
+                cursor:pointer;
+                &:hover{
+                    border-left:3px solid rgb(70, 23, 143);
+                    color:rgb(70, 23, 143);
+                }
+
+            }
+            li:first-child{
+                border-top:1px solid rgba(0,0,0,0.2);
+            }
+            li:last-child{
+                border-bottom:1px solid rgba(0,0,0,0.2);
+            }
+        }
+    }
+    .sign-out{
+        color:tomato;
+        padding:0rem 0.5rem;
+        cursor:pointer;
+        svg{
+            margin-right:1rem;
+        }
+    }
 }
 `
